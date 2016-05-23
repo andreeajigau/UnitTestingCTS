@@ -91,5 +91,13 @@ public class TestUserController extends TestCase {
 		}
 		
 	}
+	
+	public void testVerifyUserTime() throws Exception{
+		long start=System.currentTimeMillis()/1000;	    
+		boolean verificare=uc.verifyUser(username, parola);
+	    long sfarsit=System.currentTimeMillis()/1000;	 
+	    assertTrue("Prea mult timp!", sfarsit-start<1.0);
+		
+	}
 
 }

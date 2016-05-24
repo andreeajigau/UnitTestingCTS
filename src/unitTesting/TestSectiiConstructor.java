@@ -81,6 +81,16 @@ public class TestSectiiConstructor extends TestCase {
 			
 		}
 	}
+	public void testConstructorNumeInexistent(){
+		String nume="";
+		try{
+			sectii=new Sectii(idSectie, nume, tipSectie, costuriAdministrative);
+			fail("Introduceti un nume");
+		}
+		catch(Exception e){
+			
+		}
+	}
 	
 	public void testConstructorTipSectieNull(){
 		String tipSectie=null;

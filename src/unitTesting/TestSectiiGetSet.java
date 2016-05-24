@@ -81,7 +81,15 @@ public class TestSectiiGetSet extends TestCase {
 		}
 		
 	}
-	
+	public void testSetNumeInexistent(){
+		String nume="";
+		try{
+			sectii.setNume(nume);
+			fail("Nu se accepta camp gol");
+			}catch(Exception e){
+				
+			}
+	}
 	public void testSetTipNormal() throws Exception{
 		String tip="chirurgical";
 		sectii.setTipSectie(tip);

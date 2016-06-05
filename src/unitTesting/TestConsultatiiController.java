@@ -1,5 +1,8 @@
 package unitTesting;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.SQLException;
 import java.util.Timer;
 
@@ -11,18 +14,40 @@ public class TestConsultatiiController extends TestCase {
 	ConsultatiiController consultatii;
 	int luna;
 	int idSectie;
+	FileReader fr=null;
+	BufferedReader br=null;
+	
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		luna=3;
-		idSectie=2;
+		
 		consultatii=new ConsultatiiController();
+		fr=new FileReader(new File("ConsultatiiController.txt"));
+	     br=new BufferedReader(fr);
+	     String linie=null;
+	     String[] valori;
+	     while((linie=br.readLine())!=null){
+	    	 valori=linie.split(" ");
+	    	 luna=Integer.parseInt(valori[0]);
+	    	 idSectie=Integer.parseInt(valori[1]);
+	    	 	     
+	     }
+		
+		
 	}
 
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		fr.close();
+		br.close();
 	}
 
+	public void testNrConsultatiiTime() throws Exception{
+	    long start=System.currentTimeMillis()/1000;	    
+	    int valoare=consultatii.nrConsultatiiLunaPerSectie(luna, idSectie);	   
+	    long sfarsit=System.currentTimeMillis()/1000;	 
+	    assertTrue("Prea mult timp!", sfarsit-start<1.0);
+	}
 	
 	public void testNrConsultatiiValoriCorecte() throws Exception{
 		int nr=2;
@@ -78,13 +103,7 @@ public class TestConsultatiiController extends TestCase {
 		}
 	}
 	
-	public void testNrConsultatiiTime() throws Exception{
-	    long start=System.currentTimeMillis()/1000;	    
-	    int valoare=consultatii.nrConsultatiiLunaPerSectie(luna, idSectie);	   
-	    long sfarsit=System.currentTimeMillis()/1000;
-	   // System.out.println(valoare+" "+(sfarsit-start));
-	    assertTrue("Prea mult timp!", sfarsit-start<1.0);
-	}
+	
 	public void testNrConsultatiiMaxim() throws Exception{
 		int nr=0;
 		luna=12;
